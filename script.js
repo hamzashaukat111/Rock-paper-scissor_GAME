@@ -16,16 +16,21 @@ const rockConst = document.getElementById('ROCK');
 const paperConst = document.getElementById('PAPER');
 const scissorConst = document.getElementById('SCISSOR');
 
+//chosing rock paper scissor
+
 //chpsing Rock
 document.getElementById('rock').addEventListener('click', function () {
+  Refresh();
   dhekh.classList.remove('hidden');
   rockConst.classList.remove('hidden');
+
   playerSelection = 'rock';
   play(playerSelection, computerSelection);
 });
 
 //chosing paper
 document.getElementById('paper').addEventListener('click', function () {
+  Refresh();
   dhekh.classList.remove('hidden');
   paperConst.classList.remove('hidden');
   playerSelection = 'paper';
@@ -34,6 +39,8 @@ document.getElementById('paper').addEventListener('click', function () {
 
 //chosing Scissor
 document.getElementById('Scissor').addEventListener('click', function () {
+  //rockConst.classList.add("hidden");
+  Refresh();
   dhekh.classList.remove('hidden');
   scissorConst.classList.remove('hidden');
   playerSelection = 'Scissor';
@@ -50,16 +57,6 @@ function comp() {
 comp();
 document.getElementById('compchoice').innerHTML = `${computerSelection}`;
 
-console.log(computerSelection);
-console.log(ruk);
-
-//play again
-function again() {
-  rockConst.classList.add('hidden');
-  paperConst.classList.add('hidden');
-  scissorConst.classList.add('hidden');
-}
-
 //Game
 function play(playerSelection, computerSelection) {
   computerSelection = computerSelection.toLowerCase();
@@ -67,7 +64,21 @@ function play(playerSelection, computerSelection) {
   if (playerSelection == computerSelection) {
     displayy('Its a tie! close one');
   } else {
-    displayy(' close one');
+    if (
+      (playerSelection == 'rock' && computerSelection == 'scissor') ||
+      (playerSelection == 'paper' && computerSelection == 'rock') ||
+      (playerSelection == 'scissor' && computerSelection == 'paper')
+    ) {
+      displayy('YOU WON THIS ROUND!');
+      playerScore = playerScore + 1;
+      keepPlayerScore();
+      keepCpuScore();
+    } else {
+      displayy('you lost this round, try again');
+      computerScore = computerScore + 1;
+      keepPlayerScore();
+      keepCpuScore();
+    }
   }
 }
 
@@ -75,9 +86,29 @@ function play(playerSelection, computerSelection) {
 function resetGame() {
   computerScore = 0;
   playerScore = 0;
+  Refresh();
 }
 
 //display
 function displayy(str) {
   document.getElementById('resultt').innerHTML = str;
+}
+
+//function to update indivual score
+function keepPlayerScore() {
+  let plscore = document.getElementById('mypoint');
+  plscore.textContent = playerScore;
+}
+
+//update cpu score
+function keepCpuScore() {
+  let cpuscore = document.getElementById('comppoint');
+  cpuscore.textContent = computerScore;
+}
+
+// refresh game removes old string
+function Refresh() {
+  paperConst.classList.add('hidden');
+  scissorConst.classList.add('hidden');
+  rockConst.classList.add('hidden');
 }
