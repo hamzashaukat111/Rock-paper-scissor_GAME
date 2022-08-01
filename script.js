@@ -10,7 +10,7 @@ let ruk;
 const option = ['rock', 'paper', 'Scissor'];
 
 //user chooses option
-//document.getElementById
+
 const dhekh = document.querySelector('.dhekho');
 const rockConst = document.getElementById('ROCK');
 const paperConst = document.getElementById('PAPER');
@@ -20,6 +20,7 @@ const scissorConst = document.getElementById('SCISSOR');
 
 //chpsing Rock
 document.getElementById('rock').addEventListener('click', function () {
+  comp();
   Refresh();
   dhekh.classList.remove('hidden');
   rockConst.classList.remove('hidden');
@@ -30,6 +31,7 @@ document.getElementById('rock').addEventListener('click', function () {
 
 //chosing paper
 document.getElementById('paper').addEventListener('click', function () {
+  comp();
   Refresh();
   dhekh.classList.remove('hidden');
   paperConst.classList.remove('hidden');
@@ -39,7 +41,7 @@ document.getElementById('paper').addEventListener('click', function () {
 
 //chosing Scissor
 document.getElementById('Scissor').addEventListener('click', function () {
-  //rockConst.classList.add("hidden");
+  comp();
   Refresh();
   dhekh.classList.remove('hidden');
   scissorConst.classList.remove('hidden');
@@ -52,10 +54,11 @@ document.getElementById('Scissor').addEventListener('click', function () {
 function comp() {
   ruk = Math.trunc(Math.random() * 3);
   computerSelection = option[ruk];
+  document.getElementById('compchoice').innerHTML = `${computerSelection}`;
 }
 
-comp();
-document.getElementById('compchoice').innerHTML = `${computerSelection}`;
+//comp();
+//document.getElementById('compchoice').innerHTML = `${computerSelection}`;
 
 //Game
 function play(playerSelection, computerSelection) {
@@ -82,11 +85,18 @@ function play(playerSelection, computerSelection) {
   }
 }
 
+//reset score button
+document.querySelector('.check').addEventListener('click', function () {
+  resetGame();
+});
+
 //resetGame
 function resetGame() {
   computerScore = 0;
   playerScore = 0;
   Refresh();
+  document.getElementById('mypoint').textContent = 0;
+  document.getElementById('comppoint').textContent = 0;
 }
 
 //display
